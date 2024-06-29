@@ -1,4 +1,4 @@
-import { ChecklistEntry } from "../CheckList/types";
+import { ChecklistEntry } from "../Checklist/dataDefinitions";
 
 export const initialChecklist: ChecklistEntry[] = [
     {

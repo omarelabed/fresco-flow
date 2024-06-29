@@ -1,16 +1,27 @@
-import { Dispatch, SetStateAction } from "react";
+"use client";
+
+import { ProgressBar } from "../ProgressBar/ProgressBar";
 import { ChecklistItem } from "./ChecklistItem";
-import { ChecklistEntry } from "./types";
+import { ChecklistMap } from "./dataDefinitions";
 
 type Props = {
-  checklist: undefined | ChecklistEntry[];
-  setChecklist?: Dispatch<SetStateAction<ChecklistEntry[]>>;
+  checklistMap: ChecklistMap;
+  setChecklistMap: Function;
 };
 
 export const Checklist = ({
-  checklist,
+  checklistMap,
+  setChecklistMap,
 }: Props): JSX.Element => {
-  if (!checklist) {
+  const keys = Object.keys(checklistMap);
+  const doneCount = keys.filter((key) => checklistMap[key].done).length;
+  const totalCount = keys.length;
+  const percentageDone = (doneCount / totalCount) * 100;
+  
+  const checklistItems = checklistMap
+    ? Object.keys(checklistMap).map((key) => checklistMap[key])
+    : [];
+  if (!checklistItems) {
     return (
       <span className="relative flex h-3 w-3">
         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
@@ -19,14 +30,18 @@ export const Checklist = ({
     );
   } else {
     return (
-      <ul>
-        {checklist.map((entry) => (
-          <ChecklistItem
-            key={entry.key}
-            data={entry}
-          />
-        ))}
-      </ul>
+      <div>
+        <ProgressBar percentage={percentageDone} />
+        <ol>
+          {checklistItems.map((entry) => (
+            <ChecklistItem
+              key={entry.key}
+              initialItemData={entry}
+              setChecklistMap={setChecklistMap}
+            />
+          ))}
+        </ol>
+      </div>
     );
   }
 };

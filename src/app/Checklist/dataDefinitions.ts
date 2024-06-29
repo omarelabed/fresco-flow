@@ -3,3 +3,7 @@ export type ChecklistEntry = {
   done: boolean;
   key: string;
 };
+
+export type ChecklistMap = {
+  [key: ChecklistEntry['key']]: ChecklistEntry;
+};
