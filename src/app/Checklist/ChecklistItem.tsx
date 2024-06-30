@@ -11,7 +11,7 @@ type ChecklistItemProp = {
 };
 
 export const ChecklistItem = ({
-  initialItemData: { title, done, key, actions },
+  initialItemData: { title, done, key, actions, description },
   setChecklistMap,
 }: ChecklistItemProp): JSX.Element => {
   const itemId = `checklist_item_checkbox_${key}`;
@@ -44,6 +44,7 @@ export const ChecklistItem = ({
           {done && "✓"}
         </button>
       </div>
+      {description && description.map((paragraph, index) => <p className="text-sm" key={index}>{paragraph}</p>)}
       {actions && <Actions actions={actions} />}
     </li>
   );

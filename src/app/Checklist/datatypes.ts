@@ -2,6 +2,7 @@ export type ChecklistEntry = {
   title: string;
   done: boolean;
   key: string;
+  description?: Paragraph[];
   actions?: Action[];
 };
 
@@ -13,3 +14,5 @@ export type Action = {
   text: string;
   url?: string;
 };
+
+export type Paragraph = string;
