@@ -22,7 +22,7 @@ export const initialChecklist: ChecklistEntry[] = [
         url: 'https://viac.ch/'
       },
       {
-        text: 'Read about best options',
+        text: '-> learn more',
         url: 'https://www.mustachianpost.com/best-3rd-pillar-in-switzerland/',
       }
     ]
