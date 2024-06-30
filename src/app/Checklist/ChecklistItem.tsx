@@ -7,7 +7,7 @@ import { Actions } from "./ActionItems";
 
 type ChecklistItemProp = {
   initialItemData: ChecklistEntry;
-  setChecklistMap: Function;
+  setChecklistMap: Dispatch<SetStateAction<ChecklistMap>>;
 };
 
 export const ChecklistItem = ({

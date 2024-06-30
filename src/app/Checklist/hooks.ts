@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import {
   initialChecklist,
   initialChecklistMap,
@@ -11,7 +11,10 @@ enum LocalStorageKey {
   CHECKLIST_MAP = "checklistMap",
 }
 
-export const useChecklistMap = () => {
+export const useChecklistMap = (): [
+  ChecklistMap,
+  Dispatch<SetStateAction<ChecklistMap>>
+] => {
   const [checklistMap, setChecklistMap] = useState(initialChecklistMap);
 
   // useEffect makes sure that the `window` is available

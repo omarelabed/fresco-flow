@@ -4,12 +4,11 @@ import { ProgressBar } from "../ProgressBar/ProgressBar";
 import { ChecklistItem } from "./ChecklistItem";
 import { useChecklistMap } from "./hooks";
 
-export const Checklist = (): JSX.Element => {
+export const Checklist = () => {
   const [checklistMap, setChecklistMap] = useChecklistMap();
   const keys = Object.keys(checklistMap);
   const doneCount = keys.filter((key) => checklistMap[key].done).length;
   const totalCount = keys.length;
-  const percentageDone = (doneCount / totalCount) * 100;
 
   const checklistItems = checklistMap
     ? Object.keys(checklistMap).map((key) => checklistMap[key])
@@ -24,7 +23,7 @@ export const Checklist = (): JSX.Element => {
   } else {
     return (
       <div>
-        <ProgressBar percentage={percentageDone} />
+        <ProgressBar itemsDone={doneCount} totalItems={totalCount} />
         <ul>
           {checklistItems.map((entry) => (
             <ChecklistItem
