@@ -15,7 +15,7 @@ export const initialChecklist: ChecklistEntry[] = [
     done: false,
     actions: [
       {
-        text: "Send email",
+        text: "Write email",
         url: "mailto:?subject=My%20pension&body=Hello%0A%0AI%20want%20to%20ensure%20I%20contribute%20the%20maximum%20amount%20to%20my%20pension%20fund.%20Who%20can%20I%20get%20in%20touch%20with%20to%20ensure%20this%20is%20the%20case%3F%0A%0AThanks!%0A%0AKind%20regards%0A",
       },
     ],
