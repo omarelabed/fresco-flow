@@ -1,7 +1,9 @@
 "use client";
 
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { ChecklistEntry, ChecklistMap } from "./dataDefinitions";
+import { ChecklistEntry, ChecklistMap } from "./datatypes";
+import { getProgressColor } from "./utils";
+import { Actions } from "./ActionItems";
 
 type ChecklistItemProp = {
   initialItemData: ChecklistEntry;
@@ -9,8 +11,7 @@ type ChecklistItemProp = {
 };
 
 export const ChecklistItem = ({
-  initialItemData,
-  initialItemData: { title, done, key },
+  initialItemData: { title, done, key, actions },
   setChecklistMap,
 }: ChecklistItemProp): JSX.Element => {
   const itemId = `checklist_item_checkbox_${key}`;
@@ -24,21 +25,26 @@ export const ChecklistItem = ({
     });
   };
   return (
-    <li
-      className={`my-1`}
-      onClick={(event) => {
-        event.preventDefault();
-        toggleItem();
-      }}
-    >
-      <label
-        className={`cursor-pointer text-opacity-${
-          done ? "10" : "100"
-        } hover:text-opacity-45`}
-      >
-        <input type="checkbox" name={itemId} id={itemId} checked={done} />{" "}
-        {title}
-      </label>
+    <li className="my-1 p-2 rounded">
+      <div className="flex justify-between">
+        <h2 className="text-xl">{title}</h2>
+        <button
+          className={[
+            "w-6",
+            "h-6",
+            "rounded-full",
+            'text-xl',
+            getProgressColor(done),
+          ].join(" ")}
+          onClick={(event) => {
+            event.preventDefault();
+            toggleItem();
+          }}
+        >
+          {done && "✓"}
+        </button>
+      </div>
+      {actions && <Actions actions={actions} />}
     </li>
   );
 };
