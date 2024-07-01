@@ -1,6 +1,9 @@
-import { ChecklistEntry, ChecklistKey, ChecklistMap } from '../Checklist/datatypes';
+import {
+	ChecklistEntry,
+	ChecklistKey,
+} from '../Checklist/datatypes';
 
-export const initialChecklist: ChecklistEntry[] = [
+export const initialChecklistItems: ChecklistEntry[] = [
 	{
 		key: 'primary_emergency_fund',
 		title: 'Primary Emergency Cushion',
@@ -53,11 +56,6 @@ export const initialChecklist: ChecklistEntry[] = [
 	},
 ];
 
-// convert to checklist map for efficient data management
-export const initialChecklistMap: ChecklistMap = Object.fromEntries(
-	new Map(initialChecklist.map((item) => [item.key, item]))
+export const initialDoneItems = new Set<ChecklistKey>(
+	initialChecklistItems.filter(({ done }) => done).map(({ key }) => key)
 );
-
-export const initialDoneItems = new Set<ChecklistKey>(Object.keys(initialChecklistMap).filter(
-	(key) => initialChecklistMap[key].done
-));

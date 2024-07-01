@@ -1,8 +1,8 @@
 'use client';
 
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import { initialChecklistMap, initialDoneItems } from '../data';
-import { ChecklistKey, ChecklistMap } from './datatypes';
+import { initialDoneItems } from '../data';
+import { ChecklistKey } from './datatypes';
 
 enum LocalStorageKey {
   CHECKLIST_DONE_ITEMS = 'CHECKLIST_DONE_ITEMS',
