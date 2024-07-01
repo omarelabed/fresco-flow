@@ -12,25 +12,25 @@ export const useChecklistMap = (): [
   ChecklistMap,
   Dispatch<SetStateAction<ChecklistMap>>
 ] => {
-  const [checklistMap, setChecklistMap] = useState(initialChecklistMap);
+	const [checklistMap, setChecklistMap] = useState(initialChecklistMap);
 
-  // useEffect makes sure that the `window` is available
-  useEffect(() => {
-    const storedChecklistMapString = window.localStorage.getItem(
-      LocalStorageKey.CHECKLIST_MAP
-    );
-    const storedChecklistMap = storedChecklistMapString
-      ? JSON.parse(storedChecklistMapString)
-      : {};
-    setChecklistMap({ ...initialChecklistMap, ...storedChecklistMap });
-  }, []);
+	// useEffect makes sure that the `window` is available
+	useEffect(() => {
+		const storedChecklistMapString = window.localStorage.getItem(
+			LocalStorageKey.CHECKLIST_MAP
+		);
+		const storedChecklistMap = storedChecklistMapString
+			? JSON.parse(storedChecklistMapString)
+			: {};
+		setChecklistMap({ ...initialChecklistMap, ...storedChecklistMap });
+	}, []);
 
-  useEffect(() => {
-    window.localStorage.setItem(
-      LocalStorageKey.CHECKLIST_MAP,
-      JSON.stringify(checklistMap)
-    );
-  }, [checklistMap]);
+	useEffect(() => {
+		window.localStorage.setItem(
+			LocalStorageKey.CHECKLIST_MAP,
+			JSON.stringify(checklistMap)
+		);
+	}, [checklistMap]);
 
-  return [checklistMap, setChecklistMap];
+	return [checklistMap, setChecklistMap];
 };
