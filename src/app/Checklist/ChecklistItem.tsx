@@ -2,6 +2,7 @@
 
 import {
 	Dispatch,
+	MouseEventHandler,
 	SetStateAction,
 	useCallback,
 	useState,
@@ -38,6 +39,11 @@ export const ChecklistItem = ({
 			return doneKeys;
 		});
 	}, [isDone, key, setDoneItems]);
+
+	const onClick: MouseEventHandler = (event) => {
+		event.preventDefault();
+		toggleItem();
+	};
 	return (
 		<li
 			className={classNames(
@@ -49,7 +55,14 @@ export const ChecklistItem = ({
 			)}
 		>
 			<div className="flex justify-between">
-				<h2 className={classNames('text-xl', { 'line-through': isDone })}>
+				<h2
+					className={classNames(
+						'text-xl',
+						{ 'line-through': isDone },
+						'cursor-pointer'
+					)}
+					onClick={onClick}
+				>
 					{title}
 				</h2>
 				<button
@@ -60,10 +73,7 @@ export const ChecklistItem = ({
 						'transition',
 						getProgressColor(isDone)
 					)}
-					onClick={(event) => {
-						event.preventDefault();
-						toggleItem();
-					}}
+					onClick={onClick}
 				>
 					{isDone && '✓'}
 				</button>
