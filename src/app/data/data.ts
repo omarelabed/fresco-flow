@@ -6,8 +6,14 @@ export const initialChecklist: ChecklistEntry[] = [
 		title: 'Primary Emergency Cushion',
 		done: false,
 		description: [
-			'Set aside at least CHF 1 000.- on an account or in cash. Don\' ever touch them! Pro tip: you can frame one (or multiple) CHF 1 000.- bills and hang or keep them in a safe place.'
+			'Don\'t forget to grab your first CHF 1,000 bill in cash and keep it safe in a secure location.',
 		],
+		actions: [
+			{
+				text: 'ATMs nearby',
+				url: 'https://www.google.com/maps/search/ATMs',
+			}
+		]
 	},
 	{
 		key: 'pillar2',
@@ -49,10 +55,6 @@ export const initialChecklist: ChecklistEntry[] = [
 ];
 
 // convert to checklist map for efficient data management
-export const initialChecklistMap: ChecklistMap = (() => {
-	const initialChecklistMap: ChecklistMap = {};
-	for (const initialItem of initialChecklist) {
-		initialChecklistMap[initialItem.key] = initialItem;
-	}
-	return initialChecklistMap;
-})();
+export const initialChecklistMap: ChecklistMap = Object.fromEntries(
+	new Map(initialChecklist.map(item => [item.key, item]))
+);
