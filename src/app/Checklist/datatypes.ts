@@ -14,7 +14,7 @@ export type ChecklistMap = {
 
 export type Action = {
   text: string;
-  url?: string;
+  url: string;
 };
 
 export type Paragraph = string;

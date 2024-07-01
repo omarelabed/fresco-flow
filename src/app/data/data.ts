@@ -30,14 +30,13 @@ export const initialChecklist: ChecklistEntry[] = [
 		key: 'pillar3a',
 		title: 'Pillar 3a.',
 		done: false,
+		description: [
+			'[-> Learn more about your Pillar 3a options.](https://www.mustachianpost.com/best-3rd-pillar-in-switzerland/)',
+		],
 		actions: [
 			{
 				text: 'Open VIAC 3a Account',
 				url: 'https://viac.ch/',
-			},
-			{
-				text: '-> learn more',
-				url: 'https://www.mustachianpost.com/best-3rd-pillar-in-switzerland/',
 			},
 		],
 	},

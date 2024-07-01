@@ -1,10 +1,16 @@
 'use client';
 
-import { Dispatch, SetStateAction, useCallback, useEffect, useState } from 'react';
-import { ChecklistEntry, ChecklistKey, ChecklistMap } from './datatypes';
+import {
+	Dispatch,
+	SetStateAction,
+	useCallback,
+	useState,
+} from 'react';
+import { ChecklistEntry, ChecklistKey } from './datatypes';
 import { getProgressColor } from './utils';
 import { Actions } from './ActionItems';
 import classNames from 'classnames';
+import Markdown from 'react-markdown';
 
 type ChecklistItemProp = {
   initialItemData: ChecklistEntry;
@@ -37,13 +43,15 @@ export const ChecklistItem = ({
 			className={classNames(
 				'my-2',
 				'p-2',
-				'rounded-md',
+				'rounded-lg',
 				{ 'opacity-65': isDone },
 				'bg-zinc-800'
 			)}
 		>
 			<div className="flex justify-between">
-				<h2 className="text-xl">{title}</h2>
+				<h2 className={classNames('text-xl', { 'line-through': isDone })}>
+					{title}
+				</h2>
 				<button
 					className={classNames(
 						'w-6',
@@ -60,13 +68,14 @@ export const ChecklistItem = ({
 					{isDone && '✓'}
 				</button>
 			</div>
-			{description &&
+			{!isDone &&
+        description &&
         description.map((paragraph, index) => (
-        	<p className="text-sm" key={index}>
-        		{paragraph}
-        	</p>
+        	<div className="text-sm" key={index}>
+        		<Markdown>{paragraph}</Markdown>
+        	</div>
         ))}
-			{actions && <Actions actions={actions} />}
+			{!isDone && actions && <Actions actions={actions} />}
 		</li>
 	);
 };

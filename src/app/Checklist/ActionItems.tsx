@@ -6,7 +6,7 @@ type ActionsProp = {
 };
 
 export const Actions = ({ actions }: ActionsProp) => (
-	<div>
+	<div className='border-t-1 mt-2'>
 		<ul>
 			{actions.map((action) => (
 				<ActionItem key={action.text} action={action} />
