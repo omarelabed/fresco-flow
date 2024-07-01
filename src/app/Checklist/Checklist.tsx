@@ -12,8 +12,11 @@ export const Checklist = () => {
 	const { length: totalCount } = Object.keys(checklistMap);
 
 	const checklistItems = Object.keys(checklistMap)
-		.map((key) => checklistMap[key])
+		.map((key) => (
+			{...checklistMap[key], done: doneItems.has(key)}
+		))
 		.sort((item) => (doneItems.has(item.key) ? 1 : -1));
+
 	return (
 		<div>
 			<ProgressBar itemsDone={doneCount} totalItems={totalCount} />
