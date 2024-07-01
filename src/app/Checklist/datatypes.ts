@@ -1,10 +1,12 @@
 export type ChecklistEntry = {
   title: string;
   done: boolean;
-  key: string;
+  key: ChecklistKey;
   description?: Paragraph[];
   actions?: Action[];
 };
+
+export type ChecklistKey = string;
 
 export type ChecklistMap = {
   [key: ChecklistEntry['key']]: ChecklistEntry;

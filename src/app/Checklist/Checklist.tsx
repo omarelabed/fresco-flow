@@ -1,18 +1,19 @@
 'use client';
 
 import { ProgressBar } from '../ProgressBar/ProgressBar';
+import { initialChecklistMap } from '../data';
 import { ChecklistItem } from './ChecklistItem';
-import { useChecklistMap } from './hooks';
+import { useDoneItems } from './hooks';
 
 export const Checklist = () => {
-	const [checklistMap, setChecklistMap] = useChecklistMap();
-	const keys = Object.keys(checklistMap);
-	const doneCount = keys.filter((key) => checklistMap[key].done).length;
-	const totalCount = keys.length;
+	const checklistMap = { ...initialChecklistMap };
+	const [doneItems, setDoneItems] = useDoneItems();
+	const {size: doneCount} = doneItems;
+	const { length: totalCount } = Object.keys(checklistMap);
 
 	const checklistItems = Object.keys(checklistMap)
 		.map((key) => checklistMap[key])
-		.sort((item) => (item.done ? 1 : -1));
+		.sort((item) => (doneItems.has(item.key) ? 1 : -1));
 	return (
 		<div>
 			<ProgressBar itemsDone={doneCount} totalItems={totalCount} />
@@ -21,7 +22,7 @@ export const Checklist = () => {
 					<ChecklistItem
 						key={entry.key}
 						initialItemData={entry}
-						setChecklistMap={setChecklistMap}
+						setDoneItems={setDoneItems}
 					/>
 				))}
 			</ul>

@@ -1,4 +1,4 @@
-import { ChecklistEntry, ChecklistMap } from '../Checklist/datatypes';
+import { ChecklistEntry, ChecklistKey, ChecklistMap } from '../Checklist/datatypes';
 
 export const initialChecklist: ChecklistEntry[] = [
 	{
@@ -6,14 +6,14 @@ export const initialChecklist: ChecklistEntry[] = [
 		title: 'Primary Emergency Cushion',
 		done: false,
 		description: [
-			'Don\'t forget to grab your first CHF 1,000 bill in cash and keep it safe in a secure location.',
+			"Don't forget to grab your first CHF 1,000 bill in cash and keep it safe in a secure location.",
 		],
 		actions: [
 			{
 				text: 'ATMs nearby',
 				url: 'https://www.google.com/maps/search/ATMs',
-			}
-		]
+			},
+		],
 	},
 	{
 		key: 'pillar2',
@@ -56,5 +56,9 @@ export const initialChecklist: ChecklistEntry[] = [
 
 // convert to checklist map for efficient data management
 export const initialChecklistMap: ChecklistMap = Object.fromEntries(
-	new Map(initialChecklist.map(item => [item.key, item]))
+	new Map(initialChecklist.map((item) => [item.key, item]))
 );
+
+export const initialDoneItems = new Set<ChecklistKey>(Object.keys(initialChecklistMap).filter(
+	(key) => initialChecklistMap[key].done
+));

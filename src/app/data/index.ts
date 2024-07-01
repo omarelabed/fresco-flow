@@ -1,1 +1,5 @@
-export { initialChecklist, initialChecklistMap } from './data';
+export {
+	initialChecklist,
+	initialChecklistMap,
+	initialDoneItems,
+} from './data';

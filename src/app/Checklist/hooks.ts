@@ -1,36 +1,31 @@
 'use client';
 
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import { initialChecklistMap } from '../data';
-import { ChecklistMap } from './datatypes';
+import { initialChecklistMap, initialDoneItems } from '../data';
+import { ChecklistKey, ChecklistMap } from './datatypes';
 
 enum LocalStorageKey {
-  CHECKLIST_MAP = 'checklistMap',
+  CHECKLIST_DONE_ITEMS = 'CHECKLIST_DONE_ITEMS',
 }
 
-export const useChecklistMap = (): [
-  ChecklistMap,
-  Dispatch<SetStateAction<ChecklistMap>>
-] => {
-	const [checklistMap, setChecklistMap] = useState(initialChecklistMap);
-
-	// useEffect makes sure that the `window` is available
+export const useDoneItems = (): [Set<string>, Dispatch<SetStateAction<Set<string>>>] => {
+	const [doneItems, setDoneItems] = useState(initialDoneItems);
 	useEffect(() => {
-		const storedChecklistMapString = window.localStorage.getItem(
-			LocalStorageKey.CHECKLIST_MAP
+		const storedDoneItemsString = window.localStorage.getItem(
+			LocalStorageKey.CHECKLIST_DONE_ITEMS
 		);
-		const storedChecklistMap = storedChecklistMapString
-			? JSON.parse(storedChecklistMapString)
-			: {};
-		setChecklistMap({ ...initialChecklistMap, ...storedChecklistMap });
+		const storedDoneItems = storedDoneItemsString && storedDoneItemsString !== 'undefined'
+			? new Set<ChecklistKey>(JSON.parse(storedDoneItemsString))
+			: new Set<ChecklistKey>();
+		setDoneItems(storedDoneItems);
 	}, []);
 
 	useEffect(() => {
 		window.localStorage.setItem(
-			LocalStorageKey.CHECKLIST_MAP,
-			JSON.stringify(checklistMap)
-		);
-	}, [checklistMap]);
+			LocalStorageKey.CHECKLIST_DONE_ITEMS,
+			JSON.stringify(Array.from(doneItems))
+		)
+	}, [doneItems]);
 
-	return [checklistMap, setChecklistMap];
+	return [doneItems, setDoneItems];
 };
