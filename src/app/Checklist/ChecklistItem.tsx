@@ -25,7 +25,15 @@ export const ChecklistItem = ({
     });
   };
   return (
-    <li className="my-1 p-2 rounded">
+    <li
+      className={[
+        "my-1",
+        "p-2",
+        "rounded-md",
+        done && "opacity-65",
+        "bg-zinc-800",
+      ].join(" ")}
+    >
       <div className="flex justify-between">
         <h2 className="text-xl">{title}</h2>
         <button
@@ -33,7 +41,7 @@ export const ChecklistItem = ({
             "w-6",
             "h-6",
             "rounded-full",
-            'text-xl',
+            "text-xl",
             getProgressColor(done),
           ].join(" ")}
           onClick={(event) => {
@@ -44,7 +52,12 @@ export const ChecklistItem = ({
           {done && "✓"}
         </button>
       </div>
-      {description && description.map((paragraph, index) => <p className="text-sm" key={index}>{paragraph}</p>)}
+      {description &&
+        description.map((paragraph, index) => (
+          <p className="text-sm" key={index}>
+            {paragraph}
+          </p>
+        ))}
       {actions && <Actions actions={actions} />}
     </li>
   );

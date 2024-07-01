@@ -11,7 +11,9 @@ export const Checklist = () => {
   const totalCount = keys.length;
 
   const checklistItems = checklistMap
-    ? Object.keys(checklistMap).map((key) => checklistMap[key])
+    ? Object.keys(checklistMap)
+        .map((key) => checklistMap[key])
+        .sort((item) => (item.done ? 1 : -1))
     : [];
   if (!checklistItems) {
     return (
