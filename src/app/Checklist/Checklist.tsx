@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { ProgressBar } from "../ProgressBar/ProgressBar";
-import { ChecklistItem } from "./ChecklistItem";
-import { useChecklistMap } from "./hooks";
+import { ProgressBar } from '../ProgressBar/ProgressBar';
+import { ChecklistItem } from './ChecklistItem';
+import { useChecklistMap } from './hooks';
 
 export const Checklist = () => {
   const [checklistMap, setChecklistMap] = useChecklistMap();

@@ -1,9 +1,10 @@
-"use client";
+'use client';
 
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { ChecklistEntry, ChecklistMap } from "./datatypes";
-import { getProgressColor } from "./utils";
-import { Actions } from "./ActionItems";
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { ChecklistEntry, ChecklistMap } from './datatypes';
+import { getProgressColor } from './utils';
+import { Actions } from './ActionItems';
+import classNames from 'classnames';
 
 type ChecklistItemProp = {
   initialItemData: ChecklistEntry;
@@ -26,30 +27,30 @@ export const ChecklistItem = ({
   };
   return (
     <li
-      className={[
-        "my-1",
-        "p-2",
-        "rounded-md",
-        done && "opacity-65",
-        "bg-zinc-800",
-      ].join(" ")}
+      className={classNames(
+        'my-2',
+        'p-2',
+        'rounded-md',
+        { 'opacity-65': done },
+        'bg-zinc-800'
+      )}
     >
       <div className="flex justify-between">
         <h2 className="text-xl">{title}</h2>
         <button
-          className={[
-            "w-6",
-            "h-6",
-            "rounded-full",
-            "text-xl",
-            getProgressColor(done),
-          ].join(" ")}
+          className={classNames(
+            'w-6',
+            'h-6',
+            'rounded-full',
+            'transition',
+            getProgressColor(done)
+          )}
           onClick={(event) => {
             event.preventDefault();
             toggleItem();
           }}
         >
-          {done && "✓"}
+          {done && '✓'}
         </button>
       </div>
       {description &&

@@ -1,14 +1,11 @@
-"use client";
+'use client';
 
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import {
-  initialChecklist,
-  initialChecklistMap,
-} from "../data/initialChecklist";
-import { ChecklistMap } from "./datatypes";
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { initialChecklistMap } from '../data';
+import { ChecklistMap } from './datatypes';
 
 enum LocalStorageKey {
-  CHECKLIST_MAP = "checklistMap",
+  CHECKLIST_MAP = 'checklistMap',
 }
 
 export const useChecklistMap = (): [

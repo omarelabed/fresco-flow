@@ -1,5 +1,5 @@
-import { ActionItem } from "./ActionItem";
-import { Action } from "./datatypes";
+import { ActionItem } from './ActionItem';
+import { Action } from './datatypes';
 
 type ActionsProp = {
   actions: Action[];

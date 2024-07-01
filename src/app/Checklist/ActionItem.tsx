@@ -1,4 +1,4 @@
-import { Action } from "./datatypes";
+import { Action } from './datatypes';
 
 type ActionItemProp = {
   action: Action;

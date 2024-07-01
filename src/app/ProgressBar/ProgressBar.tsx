@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { getProgressColor } from "../Checklist/utils";
+import classNames from 'classnames';
 
 type ProgressBarProp = {
   itemsDone: number;
@@ -11,15 +11,16 @@ export const ProgressBar = ({ itemsDone, totalItems }: ProgressBarProp) => {
   const percentage = (itemsDone / totalItems) * 100;
   const percentageString = `${percentage}%`;
   return (
-    <div className="w-full bg-gray-200 rounded-full h-7.5 dark:bg-gray-700 sticky top-2 opacity-80">
+    <div className="w-full bg-blue-200 rounded-full h-7.5 dark:bg-blue-800 sticky top-0">
       <div
-        className={[
-          "h-7.5",
-          "rounded-full",
-          "my-2",
-          "transition-all",
-          getProgressColor(percentage === 100),
-        ].join(" ")}
+        className={classNames(
+          'h-7.5',
+          'rounded-full',
+          'my-2',
+          'transition-all',
+          'bg-green-200',
+          'dark:bg-green-800',
+        )}
         style={{ width: percentageString }}
       >
         <span className="px-2">
